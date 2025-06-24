@@ -399,6 +399,11 @@
             color: #fff;
         }
 
+        /* Netlify Forms için gizli alan */
+        .hidden {
+            display: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -571,24 +576,33 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Ücretsiz Teklif Alın</h2>
-                    <p>Projeniiz için detaylı fiyat teklifi alın</p>
+                    <p>Projeniz için detaylı fiyat teklifi alın</p>
                 </div>
-                <form class="quote-form" onsubmit="submitQuote(event)">
+                <!-- Netlify Forms ile güncellenmiş form -->
+                <form name="teklif-formu" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="quote-form">
+                    <!-- Spam koruması için gizli alan -->
+                    <p class="hidden">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    
                     <div class="form-group">
-                        <label for="name">Ad Soyad *</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="isim">Ad Soyad *</label>
+                        <input type="text" id="isim" name="isim" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="phone">Telefon *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <label for="telefon">Telefon *</label>
+                        <input type="tel" id="telefon" name="telefon" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="email">E-posta</label>
                         <input type="email" id="email" name="email">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="service">Hizmet Türü *</label>
-                        <select id="service" name="service" required>
+                        <label for="hizmet">Hizmet Türü *</label>
+                        <select id="hizmet" name="hizmet" required>
                             <option value="">Seçiniz</option>
                             <option value="ev-brandasi">Ev Brandası</option>
                             <option value="isyeri-brandasi">İşyeri Brandası</option>
@@ -597,14 +611,17 @@
                             <option value="ozel-tasarim">Özel Tasarım</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="area">Alan (m²)</label>
-                        <input type="number" id="area" name="area" placeholder="Yaklaşık alan büyüklüğü">
+                        <label for="alan">Alan (m²)</label>
+                        <input type="number" id="alan" name="alan" placeholder="Yaklaşık alan büyüklüğü">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="message">Proje Detayları</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Projeniz hakkında detaylı bilgi veriniz..."></textarea>
+                        <label for="mesaj">Proje Detayları</label>
+                        <textarea id="mesaj" name="mesaj" rows="4" placeholder="Projeniz hakkında detaylı bilgi veriniz..."></textarea>
                     </div>
+                    
                     <button type="submit" class="submit-btn">Teklif Talep Et</button>
                 </form>
             </div>
@@ -662,24 +679,6 @@
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
-        }
-
-        // Form submission
-        function submitQuote(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            
-            // Simulate form submission
-            alert('Teklif talebiniz alınmıştır! En kısa sürede size dönüş yapacağız.\n\nTalep Özeti:\n' + 
-                  'Ad Soyad: ' + data.name + '\n' +
-                  'Telefon: ' + data.phone + '\n' +
-                  'Hizmet: ' + data.service + '\n' +
-                  'Alan: ' + (data.area || 'Belirtilmedi') + ' m²');
-            
-            // Reset form
-            event.target.reset();
         }
 
         // Smooth animations on scroll
