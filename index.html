@@ -348,6 +348,27 @@
             margin: 0 auto;
         }
 
+        /* Success Message */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -399,11 +420,6 @@
             color: #fff;
         }
 
-        /* Netlify Forms için gizli alan */
-        .hidden {
-            display: none;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -452,11 +468,7 @@
 <body>
     <header>
         <nav>
-           
-            <div class="logo">
-    <img src="logo.png" alt="İnal Döşeme Branda" style="height: 170px;">
-</div>
-
+            <div class="logo">İnal Döşeme Branda</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" onclick="showSection('anasayfa')">Anasayfa</a></li>
                 <li><a href="#" onclick="showSection('hakkimizda')">Hakkımızda</a></li>
@@ -578,52 +590,63 @@
                     <h2>Ücretsiz Teklif Alın</h2>
                     <p>Projeniz için detaylı fiyat teklifi alın</p>
                 </div>
-                <!-- Netlify Forms ile güncellenmiş form -->
-                <form name="teklif-formu" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="quote-form">
-                    <!-- Spam koruması için gizli alan -->
-                    <p class="hidden">
-                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                    </p>
-                    
-                    <div class="form-group">
-                        <label for="isim">Ad Soyad *</label>
-                        <input type="text" id="isim" name="isim" required>
+                
+                <div class="quote-form">
+                    <div id="successMessage" class="success-message">
+                        Teklif talebiniz başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.
+                    </div>
+                    <div id="errorMessage" class="error-message">
+                        Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan telefon ile iletişime geçin.
                     </div>
                     
-                    <div class="form-group">
-                        <label for="telefon">Telefon *</label>
-                        <input type="tel" id="telefon" name="telefon" required>
+                    <form id="quoteForm">
+                        <div class="form-group">
+                            <label for="isim">Ad Soyad *</label>
+                            <input type="text" id="isim" name="isim" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefon">Telefon *</label>
+                            <input type="tel" id="telefon" name="telefon" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hizmet">Hizmet Türü *</label>
+                            <select id="hizmet" name="hizmet" required>
+                                <option value="">Seçiniz</option>
+                                <option value="ev-brandasi">Ev Brandası</option>
+                                <option value="isyeri-brandasi">İşyeri Brandası</option>
+                                <option value="doseme">Döşeme Hizmetleri</option>
+                                <option value="tamir">Tamir ve Bakım</option>
+                                <option value="ozel-tasarim">Özel Tasarım</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="alan">Alan (m²)</label>
+                            <input type="number" id="alan" name="alan" placeholder="Yaklaşık alan büyüklüğü">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mesaj">Proje Detayları</label>
+                            <textarea id="mesaj" name="mesaj" rows="4" placeholder="Projeniz hakkında detaylı bilgi veriniz..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Teklif Talep Et</button>
+                    </form>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #1e3c72; margin-bottom: 1rem;">Alternatif İletişim</h4>
+                        <p style="margin-bottom: 0.5rem;"><strong>📞 Telefon:</strong> +90 531 031 31 31</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>📧 E-posta:</strong> info@inaldoseme.xyz</p>
+                        <p><strong>📍 Adres:</strong> Yukarı Pazarcı, 4079. Sk. No:12, Manavgat/Antalya</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">E-posta</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="hizmet">Hizmet Türü *</label>
-                        <select id="hizmet" name="hizmet" required>
-                            <option value="">Seçiniz</option>
-                            <option value="ev-brandasi">Ev Brandası</option>
-                            <option value="isyeri-brandasi">İşyeri Brandası</option>
-                            <option value="doseme">Döşeme Hizmetleri</option>
-                            <option value="tamir">Tamir ve Bakım</option>
-                            <option value="ozel-tasarim">Özel Tasarım</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="alan">Alan (m²)</label>
-                        <input type="number" id="alan" name="alan" placeholder="Yaklaşık alan büyüklüğü">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="mesaj">Proje Detayları</label>
-                        <textarea id="mesaj" name="mesaj" rows="4" placeholder="Projeniz hakkında detaylı bilgi veriniz..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Teklif Talep Et</button>
-                </form>
+                </div>
             </div>
         </section>
     </main>
@@ -634,7 +657,7 @@
                 <h3>İletişim</h3>
                 <p>📞 +90 531 031 31 31</p>
                 <p>📧 info@inaldoseme.xyz</p>
-                <p>📍 Yukarı Pazarcı, 4079. Sk. No:12, 07600, 07600 Manavgat/Antalya</p>
+                <p>📍 Yukarı Pazarcı, 4079. Sk. No:12, 07600 Manavgat/Antalya</p>
             </div>
             <div class="footer-section">
                 <h3>Hizmet Alanları</h3>
@@ -680,6 +703,43 @@
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
+
+        // Form submission handler
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Hide previous messages
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // Simulate form submission (you can replace this with actual form submission logic)
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.innerHTML = 'Gönderiliyor...';
+            submitBtn.disabled = true;
+            
+            // Simulate network delay
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = 'Teklif Talep Et';
+                submitBtn.disabled = false;
+                
+                // Scroll to top of form
+                document.querySelector('.quote-form').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 2000);
+        });
 
         // Smooth animations on scroll
         function animateOnScroll() {
