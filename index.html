@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnal Döşeme Branda - Profesyonel Branda ve Döşeme Hizmetleri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .section {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><polygon fill="%23ddd" points="0,600 1200,600 1200,400 0,500"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .about-image {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            height: 400px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid #1e3c72;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .gallery-item:hover:before {
+            left: 100%;
+        }
+
+        /* Quote Section */
+        .quote-form {
+            max-width: 600px;
+            margin: 4rem auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .quote-form h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #2a5298, #1e3c72);
+            transform: translateY(-2px);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1e3c72;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .quote-form {
+                margin: 2rem 1rem;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+           
+            <div class="logo">
+    <img src="logo.png" alt="İnal Döşeme Branda" style="height: 170px;">
+</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showSection('anasayfa')">Anasayfa</a></li>
+                <li><a href="#" onclick="showSection('hakkimizda')">Hakkımızda</a></li>
+                <li><a href="#" onclick="showSection('hizmetler')">Hizmetler</a></li>
+                <li><a href="#" onclick="showSection('galeri')">Galeri</a></li>
+                <li><a href="#" onclick="showSection('teklif')">Teklif Al</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Anasayfa -->
+        <section id="anasayfa" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>İnal Döşeme Branda</h1>
+                    <p>Profesyonel branda ve döşeme hizmetleri ile mekanınızı güzelleştirin. Kaliteli malzeme, uygun fiyat ve garantili iş.</p>
+                    <a href="#" class="cta-button" onclick="showSection('teklif')">Ücretsiz Teklif Alın</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hakkımızda -->
+        <section id="hakkimizda" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Hakkımızda</h2>
+                    <p>Yılların deneyimi ile kaliteli hizmet</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <h2>Deneyim ve Kalite</h2>
+                        <p>İnal Döşeme Branda olarak, 15 yılı aşkın deneyimimizle ev ve işyerleriniz için en kaliteli branda ve döşeme hizmetlerini sunuyoruz. Müşteri memnuniyetini ön planda tutarak, her projede titizlikle çalışıyoruz.</p>
+                        <p>Uzman ekibimiz ve kaliteli malzemelerimizle, mekanınızın ihtiyaçlarına özel çözümler üretiyoruz. Her işimizde garantili hizmet anlayışımızla yanınızdayız.</p>
+                        <p>Modern tasarım anlayışı ve geleneksel kalite standartlarımızı birleştirerek, hayalinizdeki mekanı gerçeğe dönüştürüyoruz.</p>
+                    </div>
+                    <div class="about-image">
+                        <div>
+                            <h3>15+ Yıl Deneyim</h3>
+                            <p>Binlerce Mutlu Müşteri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hizmetler -->
+        <section id="hizmetler" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Hizmetlerimiz</h2>
+                    <p>Profesyonel çözümler, kaliteli hizmet</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🏠</div>
+                        <h3>Ev Brandası</h3>
+                        <p>Balkon, teras ve bahçe alanlarınız için dayanıklı ve estetik branda çözümleri. Güneş ve yağmura karşı koruma sağlayan kaliteli malzemeler.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🏢</div>
+                        <h3>İşyeri Brandası</h3>
+                        <p>Cafe, restoran ve mağazalar için özel tasarım brandalar. Müşterilerinize konforlu ortam sunarken işletmenizin görünümünü güzelleştirin.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🛋️</div>
+                        <h3>Döşeme Hizmetleri</h3>
+                        <p>Koltuk, sandalye ve mobilya döşeme hizmetleri. Eskimiş mobilyalarınızı yeniden hayata döndürüyoruz.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🔧</div>
+                        <h3>Tamir ve Bakım</h3>
+                        <p>Branda ve döşeme tamir hizmetleri. Mevcut ürünlerinizin bakım ve onarımını profesyonel olarak gerçekleştiriyoruz.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">🎨</div>
+                        <h3>Özel Tasarım</h3>
+                        <p>İhtiyacınıza özel tasarım ve üretim hizmetleri. Hayalinizdeki projeyi birlikte gerçekleştirelim.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">⚡</div>
+                        <h3>Hızlı Montaj</h3>
+                        <p>Hızlı ve profesyonel montaj hizmetleri. Deneyimli ekibimizle işinizi zamanında ve kaliteli şekilde tamamlıyoruz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeri -->
+        <section id="galeri" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Galeri</h2>
+                    <p>Tamamlanmış projelerimizden örnekler</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">Balkon Brandası Projesi</div>
+                    <div class="gallery-item">Cafe Brandası</div>
+                    <div class="gallery-item">Teras Brandası</div>
+                    <div class="gallery-item">Koltuk Döşeme</div>
+                    <div class="gallery-item">Restoran Brandası</div>
+                    <div class="gallery-item">Bahçe Brandası</div>
+                    <div class="gallery-item">Sandalye Döşeme</div>
+                    <div class="gallery-item">Mağaza Brandası</div>
+                    <div class="gallery-item">Villa Brandası</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teklif Al -->
+        <section id="teklif" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Ücretsiz Teklif Alın</h2>
+                    <p>Projeniiz için detaylı fiyat teklifi alın</p>
+                </div>
+                <form class="quote-form" onsubmit="submitQuote(event)">
+                    <div class="form-group">
+                        <label for="name">Ad Soyad *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefon *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Hizmet Türü *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Seçiniz</option>
+                            <option value="ev-brandasi">Ev Brandası</option>
+                            <option value="isyeri-brandasi">İşyeri Brandası</option>
+                            <option value="doseme">Döşeme Hizmetleri</option>
+                            <option value="tamir">Tamir ve Bakım</option>
+                            <option value="ozel-tasarim">Özel Tasarım</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="area">Alan (m²)</label>
+                        <input type="number" id="area" name="area" placeholder="Yaklaşık alan büyüklüğü">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Proje Detayları</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Projeniz hakkında detaylı bilgi veriniz..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Teklif Talep Et</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <p>📞 +90 531 031 31 31</p>
+                <p>📧 info@inaldoseme.xyz</p>
+                <p>📍 Yukarı Pazarcı, 4079. Sk. No:12, 07600, 07600 Manavgat/Antalya</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hizmet Alanları</h3>
+                <p>Ev Brandası</p>
+                <p>İşyeri Brandası</p>
+                <p>Döşeme Hizmetleri</p>
+                <p>Tamir ve Bakım</p>
+            </div>
+            <div class="footer-section">
+                <h3>Çalışma Saatleri</h3>
+                <p>Pazartesi - Cumartesi</p>
+                <p>08:00 - 18:00</p>
+                <p>Pazar: Kapalı</p>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem; margin-top: 2rem;">
+            <p>&copy; 2024 İnal Döşeme Branda. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionName);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Form submission
+        function submitQuote(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            alert('Teklif talebiniz alınmıştır! En kısa sürede size dönüş yapacağız.\n\nTalep Özeti:\n' + 
+                  'Ad Soyad: ' + data.name + '\n' +
+                  'Telefon: ' + data.phone + '\n' +
+                  'Hizmet: ' + data.service + '\n' +
+                  'Alan: ' + (data.area || 'Belirtilmedi') + ' m²');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Smooth animations on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Set initial styles for fade-in elements
+        document.querySelectorAll('.fade-in').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger animations for visible elements
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
