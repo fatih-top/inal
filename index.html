@@ -599,18 +599,7 @@
                         Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya doğrudan telefon ile iletişime geçin.
                     </div>
                     
-                    <!-- Netlify Forms için gerekli attributeler eklendi -->
-                    <form id="quoteForm" name="teklif-formu" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                        <!-- Netlify bot koruması için gizli alan -->
-                        <p style="display: none;">
-                            <label>
-                                Don't fill this out if you're human: <input name="bot-field" />
-                            </label>
-                        </p>
-                        
-                        <!-- Form adı gizli alan olarak -->
-                        <input type="hidden" name="form-name" value="teklif-formu" />
-                        
+                    <form id="quoteForm">
                         <div class="form-group">
                             <label for="isim">Ad Soyad *</label>
                             <input type="text" id="isim" name="isim" required>
@@ -715,14 +704,41 @@
             navLinks.classList.toggle('active');
         }
 
-        // Form submission - Netlify için güncellenmiş
+        // Form submission handler
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
-            // Netlify formu normal şekilde gönderilsin, preventDefault kullanmıyoruz
-            // Form gönderildikten sonra Netlify otomatik olarak teşekkür sayfasına yönlendirecek
+            e.preventDefault();
             
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Hide previous messages
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // Simulate form submission (you can replace this with actual form submission logic)
             const submitBtn = document.querySelector('.submit-btn');
             submitBtn.innerHTML = 'Gönderiliyor...';
             submitBtn.disabled = true;
+            
+            // Simulate network delay
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = 'Teklif Talep Et';
+                submitBtn.disabled = false;
+                
+                // Scroll to top of form
+                document.querySelector('.quote-form').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 2000);
         });
 
         // Smooth animations on scroll
